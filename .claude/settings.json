@@ -1,0 +1,39 @@
+{
+  "name": "인터넷 끝판왕 - 마케팅 캠페인 엔진",
+  "description": "온라인 마케팅 캠페인 자동 기획 및 실행",
+  "skills": [
+    {
+      "name": "campaign-strategy",
+      "source": "coreyhaines31/marketingskills",
+      "description": "캠페인 전략 기획 및 브리프 작성"
+    },
+    {
+      "name": "copywriting",
+      "source": "coreyhaines31/marketingskills",
+      "description": "광고 카피 작성 (PAS 프레임워크)"
+    },
+    {
+      "name": "content-strategy",
+      "source": "coreyhaines31/marketingskills",
+      "description": "콘텐츠 전략 및 캘린더 작성"
+    },
+    {
+      "name": "growth-experimentation",
+      "source": "coreyhaines31/marketingskills",
+      "description": "A/B 테스트 설계 및 분석"
+    },
+    {
+      "name": "marketing-psychology",
+      "source": "coreyhaines31/marketingskills",
+      "description": "심리학 기반 타겟팅 및 설득 전략"
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "meta-ads",
+      "type": "builtin",
+      "enabled": true,
+      "description": "Meta Ads (Facebook/Instagram) 캠페인 관리"
+    }
+  ]
+}
