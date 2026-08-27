@@ -22,16 +22,22 @@ function applyConfig() {
 }
 
 // ---------- 이미지 폴백 체인 ----------
-// images/모델명.png → .jpg → .webp 순서로 시도, 모두 없으면 플레이스홀더
-const IMG_EXTS = ["png", "jpg", "webp"];
+// images/모델명.png → .jpg → .webp → .svg 순서로 시도, 모두 없으면 플레이스홀더.
+// 공식 홈페이지에서 받은 png/jpg를 넣으면 기본 제공되는 svg 렌더를 자동으로 대체합니다.
+const IMG_EXTS = ["png", "jpg", "webp", "svg"];
 
 function attachImgFallback(imgEl, product) {
   let attempt = 0;
-  imgEl.src = `${product.img}.${IMG_EXTS[attempt]}`;
+  const setSrc = () => {
+    const ext = IMG_EXTS[attempt];
+    imgEl.classList.toggle("is-vector", ext === "svg");
+    imgEl.src = `${product.img}.${ext}`;
+  };
+  setSrc();
   imgEl.onerror = () => {
     attempt += 1;
     if (attempt < IMG_EXTS.length) {
-      imgEl.src = `${product.img}.${IMG_EXTS[attempt]}`;
+      setSrc();
     } else {
       imgEl.onerror = null;
       imgEl.replaceWith(buildPlaceholder(product));
