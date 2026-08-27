@@ -138,9 +138,18 @@ function initTabs() {
   });
 }
 
-// ---------- 상세 모달 ----------
+// ---------- 상세 화면 ----------
+// 직접 지정한 src(색상/갤러리 전환)에도 투명 png/svg 그림자 처리를 적용
+function setDetailImg(imgEl, src) {
+  imgEl.classList.toggle("is-vector", /(\.png|\.svg)$|^data:image\/(png|svg)/.test(src));
+  imgEl.src = src;
+}
+
 function openModal(p) {
   const modal = document.getElementById("modal");
+  const d = (typeof DETAILS !== "undefined" && DETAILS[p.id]) || {};
+
+  // 메인 이미지
   const box = modal.querySelector(".modal-media");
   box.innerHTML = "";
   const img = document.createElement("img");
@@ -148,16 +157,79 @@ function openModal(p) {
   attachImgFallback(img, p);
   box.appendChild(img);
 
+  // 갤러리 썸네일 (메인 + 추가 컷)
+  const thumbs = modal.querySelector(".detail-thumbs");
+  thumbs.innerHTML = "";
+  const gallery = d.gallery || [];
+  if (gallery.length) {
+    const mainThumb = document.createElement("button");
+    mainThumb.className = "thumb on";
+    const tImg = document.createElement("img");
+    tImg.alt = p.name;
+    attachImgFallback(tImg, p);
+    mainThumb.appendChild(tImg);
+    mainThumb.onclick = () => {
+      const fresh = document.createElement("img");
+      fresh.alt = p.name;
+      attachImgFallback(fresh, p);
+      box.innerHTML = "";
+      box.appendChild(fresh);
+      thumbs.querySelectorAll(".thumb").forEach((t) => t.classList.remove("on"));
+      mainThumb.classList.add("on");
+    };
+    thumbs.appendChild(mainThumb);
+    gallery.forEach((src) => {
+      const b = document.createElement("button");
+      b.className = "thumb";
+      b.innerHTML = `<img src="${src}" alt="${p.name}" onerror="this.closest('.thumb').remove()">`;
+      b.onclick = () => {
+        setDetailImg(img, src);
+        box.innerHTML = "";
+        box.appendChild(img);
+        thumbs.querySelectorAll(".thumb").forEach((t) => t.classList.remove("on"));
+        b.classList.add("on");
+      };
+      thumbs.appendChild(b);
+    });
+  }
+
   modal.querySelector(".modal-brand").textContent = BRAND_LABEL[p.brand];
   modal.querySelector(".modal-name").textContent = p.name;
   modal.querySelector(".modal-tag").textContent = p.tagline;
   modal.querySelector(".modal-price").innerHTML = `출고가 <strong>${fmt(p.price)}원~</strong>`;
   modal.querySelector(".modal-storages").innerHTML = p.storages.map((s) => `<span>${s}</span>`).join("");
 
+  // 색상 — colorImgs가 있으면 클릭 시 제품 이미지 전환
   const colorWrap = modal.querySelector(".modal-colors");
-  colorWrap.innerHTML = p.colors.length
-    ? p.colors.map((c) => `<span class="color-item"><i style="background:${c.hex}"></i>${c.name}</span>`).join("")
-    : `<span class="muted">색상은 상담 시 안내드립니다</span>`;
+  colorWrap.innerHTML = "";
+  const colorImgs = d.colorImgs || {};
+  if (p.colors.length) {
+    p.colors.forEach((c, idx) => {
+      const btn = document.createElement("button");
+      btn.className = "swatch" + (idx === 0 ? " on" : "") + (colorImgs[c.name] ? " clickable" : "");
+      btn.innerHTML = `<i style="background:${c.hex}"></i>${c.name}`;
+      if (colorImgs[c.name]) {
+        btn.onclick = () => {
+          setDetailImg(img, colorImgs[c.name]);
+          box.innerHTML = "";
+          box.appendChild(img);
+          colorWrap.querySelectorAll(".swatch").forEach((s) => s.classList.remove("on"));
+          btn.classList.add("on");
+          thumbs.querySelectorAll(".thumb").forEach((t) => t.classList.remove("on"));
+        };
+      }
+      colorWrap.appendChild(btn);
+    });
+  } else {
+    colorWrap.innerHTML = `<span class="muted">색상은 상담 시 안내드립니다</span>`;
+  }
+
+  // 사양표
+  const table = modal.querySelector(".spec-table");
+  table.innerHTML = (d.specs || [])
+    .map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`)
+    .join("");
+  modal.querySelector(".detail-specs").style.display = (d.specs || []).length ? "" : "none";
 
   const link = modal.querySelector(".modal-official");
   link.href = p.official;
@@ -168,6 +240,7 @@ function openModal(p) {
   };
 
   modal.classList.add("open");
+  modal.querySelector(".modal-inner").scrollTop = 0;
   document.body.style.overflow = "hidden";
 }
 
