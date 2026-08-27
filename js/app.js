@@ -30,7 +30,8 @@ function attachImgFallback(imgEl, product) {
   let attempt = 0;
   const setSrc = () => {
     const ext = IMG_EXTS[attempt];
-    imgEl.classList.toggle("is-vector", ext === "svg");
+    // png(투명배경 공식컷)·svg는 블렌딩 없이 그림자와 함께, jpg/webp(흰 배경)는 multiply로 자연스럽게
+    imgEl.classList.toggle("is-vector", ext === "svg" || ext === "png");
     imgEl.src = `${product.img}.${ext}`;
   };
   setSrc();

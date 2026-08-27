@@ -106,9 +106,9 @@ button { font-family: inherit; cursor: pointer; }
   pointer-events: none;
 }
 .hv { position: absolute; filter: drop-shadow(0 30px 44px rgba(0, 0, 0, 0.5)); }
-.hv-left { width: 300px; left: 0; top: 12px; transform: rotate(-9deg); z-index: 2; }
-.hv-right { width: 296px; right: -16px; top: 84px; transform: rotate(8deg); z-index: 3; }
-.hv-back { width: 210px; left: 116px; top: -34px; transform: rotate(4deg); z-index: 1; opacity: 0.9; }
+.hv-left { width: 250px; left: -6px; top: 0; transform: rotate(-8deg); z-index: 3; }
+.hv-right { width: 400px; right: -30px; top: 210px; transform: rotate(5deg); z-index: 2; }
+.hv-back { width: 330px; left: 90px; top: -20px; transform: rotate(3deg); z-index: 1; opacity: 0.95; }
 @media (max-width: 1120px) { .hero-visual { display: none; } }
 
 /* ---------- 버튼 ---------- */

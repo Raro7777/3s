@@ -21,7 +21,10 @@ const PRODUCTS = [
     tagline: "역대 가장 얇은 폴드 · 8형 대화면 · 215g",
     price: 2577300,
     storages: ["256GB", "512GB"],
-    colors: [],
+    colors: [
+      { name: "크림", hex: "#f0e9dc" },
+      { name: "그린 쉐도우", hex: "#6b7a5e" }
+    ],
     badge: "NEW",
     img: "images/galaxy-z-fold8-ultra",
     official: "https://www.samsung.com/sec/smartphones/galaxy-z-fold8/"
@@ -33,7 +36,12 @@ const PRODUCTS = [
     tagline: "펼치면 태블릿, 접으면 스마트폰",
     price: 2278100,
     storages: ["256GB", "512GB"],
-    colors: [],
+    colors: [
+      { name: "라벤더", hex: "#cabced" },
+      { name: "크림", hex: "#f0e9dc" },
+      { name: "그라파이트", hex: "#4a4a4f" },
+      { name: "피스타치오", hex: "#cfd9b4" }
+    ],
     badge: "NEW",
     img: "images/galaxy-z-fold8",
     official: "https://www.samsung.com/sec/smartphones/galaxy-z-fold8/"
@@ -45,7 +53,12 @@ const PRODUCTS = [
     tagline: "감성 폴더블의 정점 · 더 강력해진 플렉스윈도우",
     price: 1683000,
     storages: ["256GB", "512GB"],
-    colors: [],
+    colors: [
+      { name: "핑크", hex: "#f3c9d3" },
+      { name: "민트", hex: "#cfe8d9" },
+      { name: "크림", hex: "#f0e9dc" },
+      { name: "그라파이트", hex: "#4a4a4f" }
+    ],
     badge: "NEW",
     img: "images/galaxy-z-flip8",
     official: "https://www.samsung.com/sec/smartphones/galaxy-z-flip8/"
@@ -74,7 +87,13 @@ const PRODUCTS = [
     tagline: "대화면 플래그십 · 갤럭시 AI",
     price: 1452000,
     storages: ["256GB", "512GB"],
-    colors: [],
+    colors: [
+      { name: "블랙", hex: "#1c1c1e" },
+      { name: "스카이 블루", hex: "#b9d4ea" },
+      { name: "실버 쉐도우", hex: "#c9cdd2" },
+      { name: "핑크 골드", hex: "#efc8b8" },
+      { name: "화이트", hex: "#f3f3f0" }
+    ],
     badge: "",
     img: "images/galaxy-s26-plus",
     official: "https://www.samsung.com/sec/smartphones/galaxy-s26/"
@@ -86,7 +105,12 @@ const PRODUCTS = [
     tagline: "손에 꼭 맞는 컴팩트 플래그십",
     price: 1254000,
     storages: ["256GB", "512GB"],
-    colors: [],
+    colors: [
+      { name: "스카이 블루", hex: "#b9d4ea" },
+      { name: "핑크 골드", hex: "#efc8b8" },
+      { name: "블랙", hex: "#1c1c1e" },
+      { name: "화이트", hex: "#f3f3f0" }
+    ],
     badge: "",
     img: "images/galaxy-s26",
     official: "https://www.samsung.com/sec/smartphones/galaxy-s26/"
@@ -168,6 +192,7 @@ const PRODUCTS = [
     price: 990000,
     storages: ["256GB", "512GB"],
     colors: [
+      { name: "소프트 핑크", hex: "#f2d4cf" },
       { name: "화이트", hex: "#f5f5f2" },
       { name: "블랙", hex: "#232325" }
     ],
