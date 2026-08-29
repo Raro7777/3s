@@ -168,7 +168,10 @@ def report(rows, since, until, by, tz, tzlabel, detail):
 
     label = {"project": "프로젝트", "session": "세션", "day": "날짜",
              "model": "모델", "branch": "브랜치"}[by]
-    width = min(52, max(len(k) for k in groups))
+    candidates = list(groups)
+    if detail:
+        candidates += [f"  \u2514 {r['model']}" for r in rows]
+    width = min(52, max(24, max(len(k) for k in candidates)))
     lines += ["", f"{label}별 (사용량 많은 순)", "-" * (width + 46)]
     for name, group in ranked:
         t = totals(group)
